@@ -9,3 +9,10 @@
   padding: 50px;
   background-color: rgba(0,0,0,0.5);
 }
+
+
+.blog-content img {
+  max-width: 100%;
+  margin: 2em 0 2em 0;
+}
+
