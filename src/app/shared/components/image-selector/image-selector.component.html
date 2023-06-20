@@ -1,0 +1,47 @@
+<div class="card h-100">
+  <div class="card-header">
+    <h3 class="card-title">Images</h3>
+  </div>
+  <div class="card-body">
+    <div class="d-flex flex-md-row flex-sm-column flex-wrap">
+      <div class="col-8 p-4" style="overflow-y: scroll;">
+        <ng-container *ngIf="images$ | async as images">
+          <div class="d-flex flex-wrap">
+            <div *ngFor="let image of images"
+            (click)="selectImage(image)"
+            style="min-width: 100px;justify-content: center; cursor: pointer;"
+            class="me-1 bg-white d-flex align-items-center flex-column border p-3">
+              <img [src]="image.url" [title]="image.title" style="height: 100px;">
+              <span class="mt-1">{{image.title}}</span>
+            </div>
+          </div>
+        </ng-container>
+
+      </div>
+      <div class="col-4 p-4 bg-light">
+        <h5>Upload Image</h5>
+
+        <form #form="ngForm" (ngSubmit)="uploadImage()">
+          <div class="mt-3">
+            <input type="file" class="form-control" (change)="onFileUploadChange($event)">
+          </div>
+
+          <div class="mt-3">
+            <input type="text" class="form-control"
+            placeholder="File Name" name="filename" [(ngModel)]="fileName">
+          </div>
+
+          <div class="mt-3">
+            <input type="text" class="form-control"
+            placeholder="Title" name="title" [(ngModel)]="title">
+          </div>
+
+          <div class="mt-3">
+            <button type="submit" class="btn btn-dark">Upload</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
