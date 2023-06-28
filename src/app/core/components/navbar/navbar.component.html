@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <a class="navbar-brand" href="#">code pulse</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -10,19 +11,43 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Admin
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="['/admin/categories']">Categories</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" [routerLink]="['/admin/blogposts']">BlogPosts</a></li>
-            <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-          </ul>
-        </li>
+        <ng-container *ngIf="user !== undefined && user?.roles?.includes('Writer')">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Admin
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" [routerLink]="['/admin/categories']">Categories</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" [routerLink]="['/admin/blogposts']">BlogPosts</a></li>
+              <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+            </ul>
+          </li>
+        </ng-container>
+
 
       </ul>
+
+
+      <div class="d-flex">
+        <ng-container *ngIf="user === undefined;else showLogout">
+          <!-- Show Login Button -->
+          <a [routerLink]="['/login']" class="btn btn-primary">Login</a>
+
+        </ng-container>
+        <ng-template #showLogout>
+          <div class="d-flex align-items-center">
+            <span>{{user?.email}}</span>
+            <button class="btn btn-primary ms-3" (click)="onLogout()">Logout</button>
+
+          </div>
+
+        </ng-template>
+
+
+      </div>
 
     </div>
   </div>
