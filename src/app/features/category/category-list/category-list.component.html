@@ -2,7 +2,12 @@
 
   <h1 class="mt-3">Category List</h1>
 
-  <div class="d-flex justify-content-end mt-3">
+  <div class="d-flex justify-content-between mt-3">
+    <div class="d-flex">
+      <input type="text" class="form-control" #queryText>
+      <button type="button" class="btn btn-warning ms-3" (click)="onSearch(queryText.value)">Search</button>
+    </div>
+
     <a [routerLink]="['/admin/categories/add']" class="btn btn-primary">Add Category</a>
   </div>
 
